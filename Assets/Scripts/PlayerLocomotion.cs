@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof (Rigidbody), typeof(PlayerManager), typeof(AnimatorManager))]
+[RequireComponent(typeof (InputManager))]
 public class PlayerLocomotion : MonoBehaviour
 {
     // ToDo: Think of Required Field 

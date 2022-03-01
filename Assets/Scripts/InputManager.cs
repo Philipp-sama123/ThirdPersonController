@@ -77,7 +77,8 @@ public class InputManager : MonoBehaviour
 
     private void OnDisable()
     {
-       
+        //    playerControls.PlayerActions.LT.performed -= _ => HandleAimingInput(true);
+        //    playerControls.PlayerActions.LT.canceled -= _ => HandleAimingInput(false);
 
         playerControls.Disable();
     }
