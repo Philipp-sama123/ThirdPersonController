@@ -143,6 +143,18 @@ MonoBehaviour:
   PlayerIndex: -1
   XYAxis: {fileID: 742521434413039139, guid: ed26dccc39b788f49b92f310eef198a3, type: 3}
   ZAxis: {fileID: 0}
+--- !u!114 &145408720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145408715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b57e25c5a5ca10409e02cf4454793fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &163185999
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4073957802749470392, guid: aafcf091ec2acab4184c2fddd5474938, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.60292464
+      value: 0.5852781
       objectReference: {fileID: 0}
     - target: {fileID: 4073957802749470392, guid: aafcf091ec2acab4184c2fddd5474938, type: 3}
       propertyPath: m_LocalPosition.y
@@ -507,8 +519,8 @@ MonoBehaviour:
   m_UpdateMethod: 2
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
-    m_Style: 1
-    m_Time: 2
+    m_Style: 6
+    m_Time: 0.5
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -581,7 +593,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1652986369}
   m_LocalRotation: {x: 0.32326594, y: 0, z: 0, w: 0.94630814}
-  m_LocalPosition: {x: 0.72077817, y: 9.11953, z: -2.5400076}
+  m_LocalPosition: {x: 0.69968224, y: 9.11953, z: -2.5400076}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -620,7 +632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9196692878659312791, guid: 6178629705d2c9043a38e554b0813c55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.72077817
+      value: 0.69968224
       objectReference: {fileID: 0}
     - target: {fileID: 9196692878659312791, guid: 6178629705d2c9043a38e554b0813c55, type: 3}
       propertyPath: m_LocalPosition.y

@@ -6,7 +6,7 @@ public class InputManager : MonoBehaviour
     PlayerLocomotion playerLocomotion;  // ToDo: Think of Required Field 
     AnimatorManager animatorManager;   // ToDo: Think of Required Field 
     PlayerCombatManager playerCombatManager; // ToDo: Think of Required Field 
-    SwitchVirtualCamera virtualCameraSwitcher; // ToDo: Think of Required Field 
+    SwitchVirtualCamera switchVirtual;
 
     public Vector2 movementInput;
     public Vector2 cameraInput;
@@ -35,8 +35,8 @@ public class InputManager : MonoBehaviour
         animatorManager = GetComponent<AnimatorManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
         playerCombatManager = GetComponent<PlayerCombatManager>();
+        switchVirtual = FindObjectOfType<SwitchVirtualCamera>();
         // should be just one 
-        virtualCameraSwitcher = FindObjectOfType<SwitchVirtualCamera>();
     }
     private void OnEnable()
     {
@@ -60,9 +60,6 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.RT.performed += i => right_trigger_input = true;
             playerControls.PlayerActions.RT.canceled += i => right_trigger_input = false;
 
-            playerControls.PlayerActions.LT.performed += i => left_trigger_input = true;
-            playerControls.PlayerActions.LT.canceled += i => left_trigger_input = false;
-
             playerControls.PlayerActions.RB_Hold.performed += i => right_button_hold_input = true;
             playerControls.PlayerActions.RB_Hold.canceled += i => right_button_hold_input = false;
 
@@ -71,11 +68,17 @@ public class InputManager : MonoBehaviour
 
             playerControls.PlayerMovement.ToggleCrouching.performed += i => crouch_input = true;
             playerControls.PlayerMovement.ToggleCrouching.canceled += i => crouch_input = false;
+
+            playerControls.PlayerActions.LT.performed += _ => HandleAimingInput(true);
+            playerControls.PlayerActions.LT.canceled += _ => HandleAimingInput(false);
         }
         playerControls.Enable();
     }
+
     private void OnDisable()
     {
+       
+
         playerControls.Disable();
     }
 
@@ -88,7 +91,7 @@ public class InputManager : MonoBehaviour
 
         HandleAttackInput();
         HandleDefenseInput();
-        HandleCrouchInput(); 
+        HandleCrouchInput();
 
         //    HandleActionInput(); 
     }
@@ -145,10 +148,20 @@ public class InputManager : MonoBehaviour
             playerCombatManager.HandleDefense();
         }
     }
-
     private void HandleCrouchInput()
     {
         playerLocomotion.HandleCrouchInput(crouch_input);
+    }
+    private void HandleAimingInput(bool isAiming)
+    {
+        if (isAiming)
+        {
+            switchVirtual.StartAiming();
+        }
+        else
+        {
+            switchVirtual.CancelAiming();
+        }
     }
 }
 

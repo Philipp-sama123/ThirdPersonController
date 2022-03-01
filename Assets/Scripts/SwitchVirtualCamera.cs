@@ -3,34 +3,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SwitchVirtualCamera : MonoBehaviour
 {
     private CinemachineVirtualCamera virtualCamera;
-    private int priorityBoostAmount = 10; 
+    private int priorityBoostAmount = 10;
+
     private void Awake()
     {
-        virtualCamera = GetComponent<CinemachineVirtualCamera>(); 
+        virtualCamera = GetComponent<CinemachineVirtualCamera>();
     }
-
-    public void HandleAiming(bool isAiming)
+    public void StartAiming()
     {
-        if(isAiming)
-        {
-            StartAim(); 
-        }else
-        {
-            CancelAiming(); 
-        }
+        virtualCamera.Priority += priorityBoostAmount;
     }
-
-    private void CancelAiming()
-    {
-        virtualCamera.Priority += priorityBoostAmount; 
-    }
-
-    private void StartAim()
+    public void CancelAiming()
     {
         virtualCamera.Priority -= priorityBoostAmount;
     }
+
 }
