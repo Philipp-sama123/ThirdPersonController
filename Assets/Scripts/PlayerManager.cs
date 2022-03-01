@@ -33,7 +33,7 @@ public class PlayerManager : MonoBehaviour
     //afer Frame ended
     private void LateUpdate()
     {
-        camera.HandleAllCameraMovement();
+       // camera.HandleAllCameraMovement();
 
         isInteracting = animator.GetBool("IsInteracting");
         isUsingRootMotion = animator.GetBool("IsUsingRootMotion");

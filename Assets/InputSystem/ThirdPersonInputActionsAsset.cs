@@ -295,6 +295,14 @@ public class @ThirdPersonInputActionsAsset : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold""
+                },
+                {
+                    ""name"": ""LB_Hold"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""ff3ea928-e79e-41e8-9dd2-bf7922c98c4d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold""
                 }
             ],
             ""bindings"": [
@@ -429,6 +437,28 @@ public class @ThirdPersonInputActionsAsset : IInputActionCollection, IDisposable
                     ""action"": ""RB_Hold"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a2f8962-5e1f-4ccd-ae2e-cf8d8413ac44"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LB_Hold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2fb35d7d-2c70-4926-b237-fcc085bae36f"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LB_Hold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -448,6 +478,7 @@ public class @ThirdPersonInputActionsAsset : IInputActionCollection, IDisposable
         m_PlayerActions_RT = m_PlayerActions.FindAction("RT", throwIfNotFound: true);
         m_PlayerActions_LT = m_PlayerActions.FindAction("LT", throwIfNotFound: true);
         m_PlayerActions_RB_Hold = m_PlayerActions.FindAction("RB_Hold", throwIfNotFound: true);
+        m_PlayerActions_LB_Hold = m_PlayerActions.FindAction("LB_Hold", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -552,6 +583,7 @@ public class @ThirdPersonInputActionsAsset : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerActions_RT;
     private readonly InputAction m_PlayerActions_LT;
     private readonly InputAction m_PlayerActions_RB_Hold;
+    private readonly InputAction m_PlayerActions_LB_Hold;
     public struct PlayerActionsActions
     {
         private @ThirdPersonInputActionsAsset m_Wrapper;
@@ -562,6 +594,7 @@ public class @ThirdPersonInputActionsAsset : IInputActionCollection, IDisposable
         public InputAction @RT => m_Wrapper.m_PlayerActions_RT;
         public InputAction @LT => m_Wrapper.m_PlayerActions_LT;
         public InputAction @RB_Hold => m_Wrapper.m_PlayerActions_RB_Hold;
+        public InputAction @LB_Hold => m_Wrapper.m_PlayerActions_LB_Hold;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -589,6 +622,9 @@ public class @ThirdPersonInputActionsAsset : IInputActionCollection, IDisposable
                 @RB_Hold.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRB_Hold;
                 @RB_Hold.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRB_Hold;
                 @RB_Hold.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRB_Hold;
+                @LB_Hold.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLB_Hold;
+                @LB_Hold.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLB_Hold;
+                @LB_Hold.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLB_Hold;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -611,6 +647,9 @@ public class @ThirdPersonInputActionsAsset : IInputActionCollection, IDisposable
                 @RB_Hold.started += instance.OnRB_Hold;
                 @RB_Hold.performed += instance.OnRB_Hold;
                 @RB_Hold.canceled += instance.OnRB_Hold;
+                @LB_Hold.started += instance.OnLB_Hold;
+                @LB_Hold.performed += instance.OnLB_Hold;
+                @LB_Hold.canceled += instance.OnLB_Hold;
             }
         }
     }
@@ -629,5 +668,6 @@ public class @ThirdPersonInputActionsAsset : IInputActionCollection, IDisposable
         void OnRT(InputAction.CallbackContext context);
         void OnLT(InputAction.CallbackContext context);
         void OnRB_Hold(InputAction.CallbackContext context);
+        void OnLB_Hold(InputAction.CallbackContext context);
     }
 }

@@ -6,6 +6,7 @@ public class InputManager : MonoBehaviour
     PlayerLocomotion playerLocomotion;  // ToDo: Think of Required Field 
     AnimatorManager animatorManager;   // ToDo: Think of Required Field 
     PlayerCombatManager playerCombatManager; // ToDo: Think of Required Field 
+    SwitchVirtualCamera virtualCameraSwitcher; // ToDo: Think of Required Field 
 
     public Vector2 movementInput;
     public Vector2 cameraInput;
@@ -26,17 +27,16 @@ public class InputManager : MonoBehaviour
     public bool right_trigger_input;
     public bool left_trigger_input;
 
-
-
-    // next up CROUCHING
-
     public bool right_button_hold_input; // todo think of sth better
+    public bool left_button_hold_input; // todo think of sth better
 
     private void Awake()
     {
         animatorManager = GetComponent<AnimatorManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
         playerCombatManager = GetComponent<PlayerCombatManager>();
+        // should be just one 
+        virtualCameraSwitcher = FindObjectOfType<SwitchVirtualCamera>();
     }
     private void OnEnable()
     {
@@ -66,6 +66,9 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.RB_Hold.performed += i => right_button_hold_input = true;
             playerControls.PlayerActions.RB_Hold.canceled += i => right_button_hold_input = false;
 
+            playerControls.PlayerActions.LB_Hold.performed += i => left_button_hold_input = true;
+            playerControls.PlayerActions.LB_Hold.canceled += i => left_button_hold_input = false;
+
             playerControls.PlayerMovement.ToggleCrouching.performed += i => crouch_input = true;
             playerControls.PlayerMovement.ToggleCrouching.canceled += i => crouch_input = false;
         }
@@ -85,7 +88,8 @@ public class InputManager : MonoBehaviour
 
         HandleAttackInput();
         HandleDefenseInput();
-        HandleCrouchInput();
+        HandleCrouchInput(); 
+
         //    HandleActionInput(); 
     }
     private void HandleMovementInput()
@@ -136,7 +140,7 @@ public class InputManager : MonoBehaviour
     }
     private void HandleDefenseInput()
     {
-        if (left_trigger_input)
+        if (left_button_hold_input)
         {
             playerCombatManager.HandleDefense();
         }
@@ -144,9 +148,7 @@ public class InputManager : MonoBehaviour
 
     private void HandleCrouchInput()
     {
-
         playerLocomotion.HandleCrouchInput(crouch_input);
-
     }
 }
 

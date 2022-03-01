@@ -282,6 +282,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold"
+                },
+                {
+                    "name": "LB_Hold",
+                    "type": "PassThrough",
+                    "id": "ff3ea928-e79e-41e8-9dd2-bf7922c98c4d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold"
                 }
             ],
             "bindings": [
@@ -414,6 +422,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "RB_Hold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4a2f8962-5e1f-4ccd-ae2e-cf8d8413ac44",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LB_Hold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2fb35d7d-2c70-4926-b237-fcc085bae36f",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LB_Hold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
