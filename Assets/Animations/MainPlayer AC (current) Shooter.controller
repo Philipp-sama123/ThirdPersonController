@@ -2173,8 +2173,8 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: InputHorizontal
     m_Mirror: 0
-  m_BlendParameter: InputHorizontal
-  m_BlendParameterY: InputVertical
+  m_BlendParameter: Horizontal
+  m_BlendParameterY: Vertical
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
@@ -2962,8 +2962,8 @@ BlendTree:
     m_CycleOffset: 0.5
     m_DirectBlendParameter: InputHorizontal
     m_Mirror: 1
-  m_BlendParameter: InputHorizontal
-  m_BlendParameterY: InputVertical
+  m_BlendParameter: Horizontal
+  m_BlendParameterY: Vertical
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
