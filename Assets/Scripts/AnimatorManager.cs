@@ -18,8 +18,8 @@ public class AnimatorManager : MonoBehaviour
         playerManager = GetComponent<PlayerManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
 
-        vertical = Animator.StringToHash("Horizontal");
-        horizontal = Animator.StringToHash("Vertical");
+        vertical = Animator.StringToHash("Vertical");
+        horizontal = Animator.StringToHash("Horizontal");
         rotation = Animator.StringToHash("RotationMagnitude");
     }
 
@@ -31,7 +31,7 @@ public class AnimatorManager : MonoBehaviour
     }
     public void UpdateAnimatorValues(float horivontalMovement, float verticalMovement, bool isSprinting)
     {
-
+       
         //ToDo: Animation Snapping 
         // if you have a value - walk and you cant walk or run (rounds Value)
         // it snaps to the appropriate Animation
@@ -86,7 +86,7 @@ public class AnimatorManager : MonoBehaviour
 
         if (isSprinting)
         {
-            snappedHorizontal = horivontalMovement;
+           // snappedHorizontal = horivontalMovement;
             snappedVertical = 2;
         }
         animator.SetFloat(vertical, snappedVertical, .1f, Time.deltaTime);

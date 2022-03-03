@@ -107,7 +107,7 @@ public class InputManager : MonoBehaviour
         moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput)); // clamp value between 0 and 1 // Abs - Absolute Value
 
         //ToDo: set animator values for rotation
-        animatorManager.UpdateAnimatorValues(0, moveAmount, playerLocomotion.isSprinting);
+        animatorManager.UpdateAnimatorValues(horizontalInput, moveAmount, playerLocomotion.isSprinting);
     }
     private void HandleSprintingInput()
     {
