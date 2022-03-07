@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     // ToDo: Think of Required Fields
-    CameraManager camera;
     Animator animator;
     InputManager inputManager;
     PlayerLocomotion playerLocomotion;
+    PlayerAim playerAim;
 
     public bool isInteracting;
     public bool isUsingRootMotion; 
@@ -16,7 +16,7 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        camera = FindObjectOfType<CameraManager>();
+        playerAim = GetComponent<PlayerAim>();
         inputManager = GetComponent<InputManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
     }
@@ -29,6 +29,7 @@ public class PlayerManager : MonoBehaviour
     private void FixedUpdate()
     {
         playerLocomotion.HandleAllMovements();
+        playerAim.HandleRotation(); ;
     }
     //afer Frame ended
     private void LateUpdate()

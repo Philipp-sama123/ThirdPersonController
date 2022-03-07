@@ -9,10 +9,10 @@ public class PlayerLocomotion : MonoBehaviour
 {
     // ToDo: Think of Required Field 
     public Rigidbody playerRigidbody;
-    PlayerManager playerManager;
-    AnimatorManager animatorManager;
-    InputManager inputManager;
-    Transform cameraObject;
+    private PlayerManager playerManager;
+    private AnimatorManager animatorManager;
+    private InputManager inputManager;
+    private Transform cameraObject;
 
     Vector3 moveDirection;
 
@@ -32,7 +32,6 @@ public class PlayerLocomotion : MonoBehaviour
     public float walkingSpeed = 1.5f;
     public float runningSpeed = 5f;
     public float sprintingSpeed = 7f;
-    public float rotationSpeed = 15f;
     public float crouchingSpeedReducer = 5f;
 
     [Header("Jump Speeds")]
@@ -58,7 +57,6 @@ public class PlayerLocomotion : MonoBehaviour
             return;
         }
         HandleMovement();
-        HandleRotation();
     }
     private void HandleMovement()
     {
@@ -100,34 +98,7 @@ public class PlayerLocomotion : MonoBehaviour
         playerRigidbody.velocity = movementVelocity;
 
     }
-    private void HandleRotation()
-    {
-        Vector3 targetDirection = Vector3.zero;
-        // prevents rotation while jumping
-        if (isJumping)
-        {
-            return;
-        }
 
-        // Always face the direction you are running to
-        targetDirection = cameraObject.forward * inputManager.verticalInput;
-        targetDirection = targetDirection + cameraObject.right * inputManager.horizontalInput;
-        targetDirection.Normalize();
-        targetDirection.y = 0;
-
-        if (targetDirection == Vector3.zero)
-        {
-            targetDirection = transform.forward;
-        }
-        //look towards target Rotation
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);  // Quaternions are used to calculate rotations in Unity 
-        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime); // Should you use when you want behavior independent of the Frame Rate(!)  -- framerate will always differ!
-
-        // ToDo: Handle rotation in Animator
-    //    animatorManager.UpdateAnimatorRotationValues(targetRotation.z);
-
-        transform.rotation = playerRotation;
-    }
     private void HandleFallingAndLanding()
     {
         RaycastHit hit;
