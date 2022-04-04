@@ -93,59 +93,16 @@ public class AnimatorManager : MonoBehaviour
         animator.SetFloat(horizontal, snappedHorizontal, .1f, Time.deltaTime);
     }
 
-    public void UpdateAnimatorRotationValues(float rotationInput)
-    {
-        float snappedRotation;
-
-        #region SnappedRotation
-        if (rotationInput > 0f && rotationInput < 0.3f)
-        {
-            snappedRotation = 0.25f;
-        }
-        else if (rotation > 0.3f && rotationInput < 0.55f)
-        {
-            snappedRotation = 0.5f;
-        }
-        else if (rotation > 0.55f && rotationInput < 0.8f)
-        {
-            snappedRotation = 0.75f;
-        }
-        else if (rotation > 0.8f)
-        {
-            snappedRotation = 1f;
-        }
-        else if (rotationInput < 0 && rotationInput > -0.3f)
-        {
-            snappedRotation = -0.25f;
-        }
-        else if (rotationInput < -0.55 && rotationInput > -0.8f )
-        {
-            snappedRotation = -0.75f;
-        }
-        else if (rotationInput < -0.8f)
-        {
-            snappedRotation = -1f;
-        }
-        else
-        {
-            snappedRotation = 0;
-        }
-        #endregion
-
-        animator.SetFloat(rotation, rotationInput, .1f, Time.deltaTime);
-    }
     //Callback for processing animation movements for modifying root motion.
     //This callback will be invoked at each frame after the state machines and the animations have been evaluated, but before OnAnimatorIK.
     private void OnAnimatorMove()
     {
         //use root Motion
-        if (playerManager.isUsingRootMotion)
-        {
-            playerLocomotion.playerRigidbody.drag = 0;
-            Vector3 deltaPosition = animator.deltaPosition;
-            deltaPosition.y = 0;
-            Vector3 velocity = deltaPosition / Time.deltaTime;
-            playerLocomotion.playerRigidbody.velocity = velocity;
-        }
+        if (!playerManager.isUsingRootMotion) return;
+        playerLocomotion.playerRigidbody.drag = 0;
+        Vector3 deltaPosition = animator.deltaPosition;
+        deltaPosition.y = 0;
+        Vector3 velocity = deltaPosition / Time.deltaTime;
+        playerLocomotion.playerRigidbody.velocity = velocity;
     }
 }

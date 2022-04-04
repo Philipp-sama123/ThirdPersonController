@@ -5,41 +5,46 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     // ToDo: Think of Required Fields
-    Animator animator;
-    InputManager inputManager;
-    PlayerLocomotion playerLocomotion;
-    PlayerAim playerAim;
+    private Animator _animator;
+    private InputManager _inputManager;
+    private PlayerLocomotion _playerLocomotion;
+    private PlayerAim _playerAim;
 
     public bool isInteracting;
-    public bool isUsingRootMotion; 
+    public bool isUsingRootMotion;
+    private static readonly int IsInteracting = Animator.StringToHash("IsInteracting");
+    private static readonly int IsUsingRootMotion = Animator.StringToHash("IsUsingRootMotion");
+    private static readonly int IsGrounded = Animator.StringToHash("IsGrounded");
+    private static readonly int IsJumping = Animator.StringToHash("IsJumping");
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
-        playerAim = GetComponent<PlayerAim>();
-        inputManager = GetComponent<InputManager>();
-        playerLocomotion = GetComponent<PlayerLocomotion>();
+        _animator = GetComponent<Animator>();
+        _playerAim = GetComponent<PlayerAim>();
+        _inputManager = GetComponent<InputManager>();
+        _playerLocomotion = GetComponent<PlayerLocomotion>();
     }
+
     private void Update()
     {
-        inputManager.HandleAllInputs();
+        _inputManager.HandleAllInputs();
     }
+
     // When working with Rigidbodies everything behaves much nicer in fixedUpdate -- Unity specific 
     // everything moving related should happen here 
     private void FixedUpdate()
     {
-        playerLocomotion.HandleAllMovements();
-        playerAim.HandleRotation(); 
+        _playerLocomotion.HandleAllMovements();
+        _playerAim.HandleRotation();
     }
+
     //afer Frame ended
     private void LateUpdate()
     {
-       // camera.HandleAllCameraMovement();
+        isInteracting = _animator.GetBool(IsInteracting);
+        isUsingRootMotion = _animator.GetBool(IsUsingRootMotion);
+        _playerLocomotion.isJumping = _animator.GetBool(IsJumping);
 
-        isInteracting = animator.GetBool("IsInteracting");
-        isUsingRootMotion = animator.GetBool("IsUsingRootMotion");
-        animator.SetBool("IsGrounded", playerLocomotion.isGrounded);
-
-        playerLocomotion.isJumping = animator.GetBool("IsJumping");
+        _animator.SetBool(IsGrounded, _playerLocomotion.isGrounded);
     }
 }
